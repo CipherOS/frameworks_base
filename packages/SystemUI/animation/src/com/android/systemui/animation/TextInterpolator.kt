@@ -17,6 +17,7 @@ package com.android.systemui.animation
 
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Color
 import android.graphics.fonts.Font
 import android.graphics.fonts.FontVariationAxis
 import android.graphics.text.PositionedGlyphs
@@ -265,10 +266,17 @@ class TextInterpolator(
                     // Move to drawing origin.
                     val origin = layout.getDrawOrigin(lineNo)
                     canvas.translate(origin, layout.getLineBaseline(lineNo).toFloat())
-
+                    // techyminati: Cipher Clock change start
+                    var CipherColor = tmpPaint.color
+                    if (lineNo == 0) {
+                    // Set to Cipher blue
+                    tmpPaint.setColor(Color.parseColor("#7E7EF7"))
+                    }
                     run.fontRuns.forEach { fontRun ->
                         drawFontRun(canvas, run, fontRun, lineNo, tmpPaint)
                     }
+                    tmpPaint.setColor(CipherColor)
+                   // clock change end
                 } finally {
                     canvas.restore()
                 }
